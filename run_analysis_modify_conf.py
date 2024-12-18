@@ -5,7 +5,7 @@ import subprocess
 import configparser
 
 MAX_EV = 60000
-CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
+CORRY = "/home/yoonha/Work/corryvreckan/bin/corry"
 
 def modify_conf(base_conf, new_conf, updates):
     # ConfigParser 설정
@@ -44,10 +44,11 @@ def run_corry(run, momentum, nevents, stage, det_file_dir, detectors_file):
             "detectors_file": args.geometry if stage == "createmask" else os.path.abspath(detectors_file),
             "detectors_file_updated": result_path,
             "number_of_events": str(nevents),
+            #"histogram_file" : f"{runno}.root"
         }
     }
 
-    if stage == "analyse":
+    if stage == "analyse" or stage == "prealign":
         updates["Corryvreckan"]["histogram_file"] = f"{stage}_{runno}.root"
     else:
         updates["Corryvreckan"]["histogram_file"] = f"{stage}.root"
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Automated corryvreckan")
     parser.add_argument("raw_file_dir", type=str, help="Path to raw file to analyze")
     parser.add_argument("-p", "--beam_momentum", type=float, default=3.0, help="Beam momentum, default 3.0 GeV/c")
-    parser.add_argument("-g", "--geometry", type=str, default="/Users/yoonha/ITS3/202412KEK_analysis/geometry/6ALPIDE.conf",
+    parser.add_argument("-g", "--geometry", type=str, default="/home/yoonha/Work/202412KEK_analysis/geometry/6ALPIDE.conf",
                         help="Path to geometry file")
 
     args = parser.parse_args()

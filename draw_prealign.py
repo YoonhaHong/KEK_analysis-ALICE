@@ -44,15 +44,10 @@ if __name__ == "__main__":
     #output_dir = sys.argv[2]
 
     # 저장하려는 히스토그램 경로 목록
-    hist_paths = [
-        "Tracking4D/trackChi2ndof",
-        "Tracking4D/trackAngleX",
-        "Tracking4D/trackAngleY",
-    ]
-
+    hist_paths = [] #Prealignment/ALPIDE_NUM/correlationX
     for i in [1,2,3,5,6,7]: 
-        hist_paths.append( f"Tracking4D/ALPIDE_{i}/local_residuals/LocalResidualsX")
-        hist_paths.append( f"Tracking4D/ALPIDE_{i}/local_residuals/LocalResidualsY")
+        hist_paths.append( f"Prealignment/ALPIDE_{i}/correlationX")
+        hist_paths.append( f"Prealignment/ALPIDE_{i}/correlationY")
 
     output_dir = root_file_path[:-5]
     if os.path.exists(output_dir):
