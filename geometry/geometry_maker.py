@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.9
+
 import os
 from math import sqrt
 import pandas as pd
@@ -10,7 +12,7 @@ dict_hu_info =[
 material_budget = 0.0005
 
 moss_index = 3
-moss_posz_mm  = 76.2
+moss_posz_mm  = 75
 moss_posy_mm  = 0
 dict_reg_info =[
     {"reg": "tb0", "posx_mm": 8,    "roi": None},

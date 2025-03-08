@@ -5,7 +5,7 @@ import subprocess
 import configparser
 
 MAX_EV = 60000
-CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
+CORRY = "/home/npl/Software/install/corryvreckan/bin/corry"
 
 def modify_conf(base_conf, new_conf, updates):
     # ConfigParser 설정

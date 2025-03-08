@@ -27,9 +27,9 @@ def draw_fit_result(fit_result, precision=0):
         latex_x.DrawLatexNDC(0.15, 0.82, f"Mean: {mean_x:.{precision}f}")
         latex_x.DrawLatexNDC(0.15, 0.72, f"Sigma: {sigma_x:.{precision}f}")
 
-def plot_beamstr(input,outputdir):
+def plot_beamstr(rootfile,outputdir):
 
-    analyse_root = ROOT.TFile.Open(input,"READ")
+    analyse_root = ROOT.TFile.Open(rootfile,"READ")
     _planes = [f"ALPIDE_{i}" for i in range(15)] 
     planes = []
     for plane in _planes:
@@ -50,7 +50,7 @@ def plot_beamstr(input,outputdir):
     pad1.cd()
     title = ROOT.TLatex()
     title.SetTextSize(0.3)
-    title.DrawLatex(.05,0.1,str(input))
+    title.DrawLatex(.05,0.1,str(rootfile))
     info = ROOT.TLatex()
     info.SetTextSize(0.3)
     infostr=""
@@ -76,7 +76,7 @@ def plot_beamstr(input,outputdir):
             if t == 0:
                 #pad2.cd(pad_index)
                 clustermap = analyse_root.Get(f"ClusteringSpatial/{plane}/clusterPositionLocal")
-                clustermap.Rebin2D(16, 16)
+                #clustermap.Rebin2D(16, 16)
                 clustermap.Draw("COLZ")
             elif t == 1:
                 hitmap = getattr(analyse_root.EventLoaderEUDAQ2, plane).Get("hitmap")
@@ -122,10 +122,10 @@ def plot_beamstr(input,outputdir):
     pad3.cd(3)
     trackchi2ndof = analyse_root.Get(f"Tracking4D/trackChi2ndof")
     trackchi2ndof.Draw()
-
-    ROOT.gPad.Update()
     
     #c1.Update()
-    c1.Print(outputdir+"/"+os.path.basename(input).replace('.root','.png'))
-    ROOT.gPad.Update()
-    c1.Update()
+    c1.Print(outputdir+"/"+os.path.basename(rootfile).replace('.root','.png'))
+    #ROOT.gPad.Update()
+    #c1.Update()
+    input("Press any key to exit")
+    

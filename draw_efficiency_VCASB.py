@@ -87,7 +87,7 @@ if __name__ == "__main__":
     # Analyze efficiencies
     efficiency_df = analyze_efficiencies(base_directory, output_dir)
     # Save results to CSV
-    efficiency_df.to_csv(f"{output_dir}/efficiency_results.csv", index=False)
+    efficiency_df.to_csv(f"{output_dir}/{os.path.basename(args.base_dir)}+efficiency_results.csv", index=False)
     
 
     # Apply WP3 style settings
@@ -132,7 +132,8 @@ if __name__ == "__main__":
                 detector_data['efficiency']*100., 
                 yerr=detector_data['efficiency_error']*100., 
                 fmt='o-', 
-                label=detector)
+                label=f"{detector}")
+    ax1.legend(bbox_to_anchor=(1.15, 0), loc='lower left', borderaxespad=0.)
         
     # 두 번째 y축 생성 (twinx를 사용해 ax1과 x축을 공유)
     ax2 = ax1.twinx()
@@ -147,10 +148,10 @@ if __name__ == "__main__":
 
     ax2.axhline(y=1e-6, color='grey', linestyle=':')
     ax2.text(ax2.get_xlim()[1]*0.99, 1e-6*1.70, "FHR measurement sensitivity limit", fontsize=9, color='grey', ha='right', va='top')
-    ax2.legend(bbox_to_anchor=(1.15, 0), loc='lower left', borderaxespad=0.)
+    #ax2.legend(bbox_to_anchor=(1.15, 0), loc='lower left', borderaxespad=0.)
   
 
 
-    
-    plt.savefig(f"{output_dir}/efficiency_vs_VCASB.png")
+    print(os.path.basename(args.base_dir))
+    plt.savefig(f"{output_dir}/{os.path.basename(args.base_dir)}+efficiency_vs_VCASB.png")
     print(efficiency_df)

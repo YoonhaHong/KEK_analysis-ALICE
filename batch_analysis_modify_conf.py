@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.9
+
 # batch analysis version of run_analysis_modify_conf.py
 import pandas as pd
 import os
@@ -14,6 +16,7 @@ CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Automated corryvreckan for batch analysis")
     parser.add_argument("csv_file_dir", type=str, help="Path to csv file to batch analyze")
+    parser.add_argument("--raw_dir", '-o', type=str, default="../../cernbox/202503_KEK/data", help="Path to csv file to batch analyze")
 
 
     args = parser.parse_args()
@@ -40,7 +43,7 @@ if __name__ == "__main__":
         aligned_conf = ""
 
         for _, row in tqdm(group.iterrows(), total=len(group), ascii=True, desc=f"Processing {region}", position=0):
-            run = row['raw_file']
+            run = os.path.join(args.raw_dir, row['raw_file'])
             runno = os.path.basename(run)[:-4]
             geometry = row['geometry']
             vcasb = int( row['VCASB'] )
@@ -72,7 +75,7 @@ if __name__ == "__main__":
                 print( "******************************\n")  
 
             print( f"STARTING analysis of {runno} : {brief_name}" )
-            run_corry(run = run, stage = "analyse", det_file_dir = det_file_dir, nevents=200000,     detectors_file = aligned_conf, output_dir=output_dir)
+            run_corry(run = run, stage = "analyse", det_file_dir = det_file_dir, nevents=100000,     detectors_file = aligned_conf, output_dir=output_dir)
             
             # Rename the root file with brief_name
             root_file = os.path.join(output_dir, f"analyse_{runno}.root")

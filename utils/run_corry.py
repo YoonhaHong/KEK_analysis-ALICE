@@ -4,7 +4,7 @@ import argparse
 import subprocess
 import configparser
 
-CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
+CORRY = '/home/npl/Software/install/corryvreckan/bin/corry'	
 
 def modify_conf(base_conf, new_conf, updates):
     # ConfigParser 설정
@@ -70,7 +70,7 @@ def run_corry(**kwargs):
     if stage in ["align", "analyse"]:
         updates["Tracking4D"] = {"momentum": f"{momentum}GeV"}
     if stage=="prealign" and momentum > 4.9:
-        updates["Prealignment"]["fit_range_rel"] = 50
+        updates |= {"Prealignment": {"fit_range_rel": "50"}}
     #KEK beam is good at 5GeV/c
 
     new_conf = os.path.join(det_file_dir, f"{stage}.conf")

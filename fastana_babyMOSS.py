@@ -19,7 +19,7 @@ def get_arguments():
     parser.add_argument('--nevents',  '-n', type=int, default=30000, help='# of events.')
     parser.add_argument('--corry',  '-e', type=str, default='/home/npl/Software/install/corryvreckan/bin/corry', help='corry executable.')
     parser.add_argument('--momentum', '-P', type=float, default=5.0, help="Beam momentum, default 5.0 GeV/c")
-    parser.add_argument('--geometry',  '-g', type=str, default='./geometry/6ALPIDE.conf', help='corry-geometry-file to run QA.')
+    parser.add_argument('--geometry',  '-g', type=str, default='./geometry/tb0.conf', help='corry-geometry-file to run QA.')
     parser.add_argument('--plotting',  '-p', action='store_true', help='Only perform the plotting step.')
     parser.add_argument('--ow',  '-ow', action='store_true', help='Overwrite already existing QA files.')
     args=parser.parse_args()
@@ -52,6 +52,3 @@ if __name__=="__main__":
         root_file_name =    f"analyse_{runno}.root"
 
     if not os.path.exists(args.outputdir): os.mkdir(args.outputdir)
-    
-    root_path = os.path.join(args.outputdir, root_file_name)
-    plot_beamstr(root_path, args.outputdir)
