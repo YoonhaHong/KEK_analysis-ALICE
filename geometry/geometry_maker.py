@@ -15,14 +15,14 @@ moss_index = 3
 moss_posz_mm  = 75
 moss_posy_mm  = 0
 dict_reg_info =[
-    {"reg": "tb0", "posx_mm": 8,    "roi": None},
-    {"reg": "tb1", "posx_mm": 2,    "roi": None},
-    {"reg": "tb2", "posx_mm": -4,   "roi": None},
-    {"reg": "tb3", "posx_mm": -10,  "roi": None},
-    {"reg": "bb0", "posx_mm": 10,   "roi": None},
-    {"reg": "bb1", "posx_mm": 4,    "roi": None},
-    {"reg": "bb2", "posx_mm": -2,   "roi": None},
-    {"reg": "bb3", "posx_mm": -8,   "roi": None},
+    {"reg": "tb0", "posx_mm": 10,   "roi": "[[32,0],[32,160],[256,160],[256,0]]"},
+    {"reg": "tb1", "posx_mm": 4,    "roi": "[[0,0],[0,160],[256,160],[256,0]]"},
+    {"reg": "tb2", "posx_mm": -2,   "roi": "[[0,0],[0,160],[256,160],[256,0]]"},
+    {"reg": "tb3", "posx_mm": -8,   "roi": "[[0,0],[0,160],[224,160],[224,0]]"},
+    {"reg": "bb0", "posx_mm": 10,   "roi": "[[40,0],[40,200],[320,200],[320,0]]"},
+    {"reg": "bb1", "posx_mm": 4,    "roi": "[[0,0],[0,200],[320,200],[320,0]]"},
+    {"reg": "bb2", "posx_mm": -2,   "roi": "[[0,0],[0,200],[320,200],[320,0]]"},
+    {"reg": "bb3", "posx_mm": -8,   "roi": "[[0,0],[0,200],[280,200],[280,0]]"},
 ]
 
 
@@ -32,10 +32,10 @@ def create_geometry_conf(base_conf, reg, output_dir="."):
     """
     Create geometry file according to 'base_conf'
 
-    :param base_conf: path of template .conf file 
-    :param reg: region name (ex: tb1)
-    :param roi: ROI (ex: [[100, 0], [100, 200], [320, 200], [320, 0]])
-    :param material_budget: material_budget (ex: 0.0005)
+    :param base_conf: path of template .conf file(str)
+    :param reg: region name (str)(ex: tb1)
+    :param roi: ROI (str)(ex: [[100, 0], [100, 200], [320, 200], [320, 0]])
+    :param material_budget: material_budget (float)(ex: 0.0005)
     :param output_dir: directory to save created geometry file (default: ".")
     """
     # path to save
@@ -76,9 +76,9 @@ def create_geometry_conf(base_conf, reg, output_dir="."):
         'coordinates': '"cartesian"',
         'orientation': f'{orientation}',
         'orientation_mode': 'xyz',
-        'role': '"auxiliary"'
+        'role': '"DUT"',
+        'roi': f'{roi}',
     }
-    if roi is not None: config[new_section] |= {'roi': roi}
 
     # save new config
     with open(output_file, "w") as file:
