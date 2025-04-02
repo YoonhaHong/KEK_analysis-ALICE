@@ -1,0 +1,14 @@
+log.txt
+*.raw
+*.root
+
+run/*
+output/*
+masks/*
+
+
+*.swp
+.DS_Store
+.ipynb_checkpoints
+*.ipynb
+
