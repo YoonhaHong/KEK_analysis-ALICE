@@ -3,8 +3,12 @@ import shutil
 import argparse
 import subprocess
 import configparser
+import platform
 
-CORRY = '/home/npl/Software/install/corryvreckan/bin/corry'	
+if platform.system() == "Darwin":  # macOS
+    CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
+else:  # Linux 
+    CORRY = "/home/npl/Software/install/corryvreckan/bin/corry"
 
 def modify_conf(base_conf, new_conf, updates):
     # ConfigParser 설정
