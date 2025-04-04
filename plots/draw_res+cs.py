@@ -14,8 +14,6 @@ import argparse
 from datetime import date, datetime
 from drawing import *
 
-
-
 def extract_value_from_dir(base_dir, output_dir):
     """
     Analyze and collect efficiencies for all detectors.
@@ -160,12 +158,11 @@ if __name__ == "__main__":
     lines = Get_descriptions(dir_name=base_directory)
     multiline_text_legend = "\n".join(lines)
     #mask_line = Get_mask_info(Halfunit, CHIPNAME)
-    plot_date = str(date.today().day) + ' ' + datetime.now().strftime("%b") + ' ' + str(date.today().year)
+#plot_date = str(date.today().day) + ' ' + datetime.now().strftime("%b") + ' ' + str(date.today().year)
     lines_beam = [
         r'$\bf{ALICE}$ $\bf{ITS3}$ beam test $\it{WIP}$',
         '@ KEK PF-AR Mar 2025',
         r'5 GeV/$\it{c}$ electrons',
-        'Plotted on {}'.format(plot_date),
     ]
     multiline_text_beam = "\n".join(lines_beam)
 

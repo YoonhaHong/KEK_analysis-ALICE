@@ -74,7 +74,7 @@ if __name__ == "__main__":
                 print( "******************************\n")  
 
             print( f"STARTING analysis of {runno} : {brief_name}" )
-            run_corry(run = run, stage = "analyse", det_file_dir = det_file_dir, nevents=100000,     detectors_file = aligned_conf, output_dir=output_dir)
+            run_corry(run = run, stage = "analyse", det_file_dir = det_file_dir, nevents=-1,     detectors_file = aligned_conf, output_dir=output_dir)
             
             # Rename the root file with brief_name
             root_file = os.path.join(output_dir, f"analyse_{runno}.root")

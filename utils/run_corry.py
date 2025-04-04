@@ -8,7 +8,7 @@ import platform
 if platform.system() == "Darwin":  # macOS
     CORRY = "/Users/yoonha/ITS3/corryvreckan/bin/corry"
 else:  # Linux 
-    CORRY = "/home/npl/Software/install/corryvreckan/bin/corry"
+    CORRY = "/home/yoonha/ITS3/corryvreckan/bin/corry"
 
 def modify_conf(base_conf, new_conf, updates):
     # ConfigParser 설정
